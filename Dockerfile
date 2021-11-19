@@ -37,7 +37,7 @@ COPY ./ccache /ccache/
 WORKDIR /ccache/
 RUN apt-get update && apt-get install -y --no-install-recommends $CCACHE_DEPS
 # Tell the ccache build system not to bother with things like documentation.
-ENV RUN_FROM_BUILD_FARM=yes
+# ENV RUN_FROM_BUILD_FARM=yes
 RUN ./autogen.sh
 RUN ./configure --enable-memcached
 RUN make
@@ -334,8 +334,8 @@ RUN CCACHE_RUNTIME_DEPS="libmemcached-dev" && \
                                                $NNPY_RUNTIME_DEPS \
                                                $THRIFT_RUNTIME_DEPS \
                                                $GRPC_RUNTIME_DEPS \
-                                               $SYSREPO_RUNTIME_DEPS && \
-    rm -rf /var/cache/apt/* /var/lib/apt/lists/*
+                                               $SYSREPO_RUNTIME_DEPS
+
 # Configure ccache so that descendant containers won't need to.
 COPY ./docker/ccache.conf /usr/local/etc/ccache.conf
 # Copy files from the build containers.
