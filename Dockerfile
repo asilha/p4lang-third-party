@@ -37,7 +37,7 @@ COPY ./ccache /ccache/
 WORKDIR /ccache/
 RUN apt-get update && apt-get install -y --no-install-recommends $CCACHE_DEPS
 # Tell the ccache build system not to bother with things like documentation.
-# ENV RUN_FROM_BUILD_FARM=yes
+ENV RUN_FROM_BUILD_FARM=yes
 RUN ./autogen.sh
 RUN ./configure --enable-memcached
 RUN make
